@@ -3,7 +3,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchNoteById } from '@/lib/api/api'; 
+import { fetchNoteById } from '@/lib/api'; 
 import { Note } from '@/types/note';
 
 import css from './NoteDetails.module.css'; 
