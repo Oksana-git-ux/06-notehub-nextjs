@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { createPortal } from 'react-dom';
 import css from './Modal.module.css';
 
@@ -10,7 +10,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
     const [modalRoot, setModalRoot] = useState<HTMLElement | null>(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const root = document.getElementById('modal-root');
         if (root) {
             setModalRoot(root);
