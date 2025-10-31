@@ -3,11 +3,14 @@ import { fetchNoteById } from '@/lib/api';
 import NoteDetailsClient from './NoteDetails.client';
 
 interface NoteDetailsPageProps {
-  params: { id: string };
+  params: Promise<{
+    id: string;
+  }> | { id: string };
 }
 
 export default async function NoteDetailsPage({ params }: NoteDetailsPageProps) {
-  const noteId = params.id;
+  const resolvedParams = await params;
+  const noteId = resolvedParams.id;
 
  if (!noteId) {
     return <div>Note ID is missing.</div>;
