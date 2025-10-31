@@ -7,17 +7,22 @@ interface NoteDetailsPageProps {
 }
 
 export default async function NoteDetailsPage({ params }: NoteDetailsPageProps) {
-  const { id } = params;
+  const noteId = params.id;
+
+ if (!noteId) {
+    return <div>Note ID is missing.</div>;
+  }
+
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ['note', id],
-    queryFn: () => fetchNoteById(id),
+    queryKey: ['note', noteId],
+    queryFn: () => fetchNoteById(noteId),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NoteDetailsClient noteId={id} /> 
+      <NoteDetailsClient noteId={noteId} /> 
     </HydrationBoundary>
   );
 }
